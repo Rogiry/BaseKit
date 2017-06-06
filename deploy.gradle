@@ -1,0 +1,122 @@
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+
+version = rootProject.ext.VERSION_NAME
+group = rootProject.ext.GROUP_ID
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper parameters
+        pom {
+            project {
+                packaging 'aar'
+
+                name rootProject.ext.DESCRIPTION
+                url rootProject.ext.WEB_SITE_URL
+                description rootProject.ext.DESCRIPTION
+                version rootProject.ext.VERSION_NAME
+
+                licenses {
+                    license {
+                        name rootProject.ext.LICENSE
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id rootProject.ext.DEVELOPER_ID
+                        name rootProject.ext.DEVELOPER_NAME
+                        email rootProject.ext.DEVELOPER_EMAIL
+                    }
+                }
+                scm {
+                    connection rootProject.ext.GIT_URL
+                    developerConnection rootProject.ext.GIT_URL
+                    url rootProject.ext.WEB_SITE_URL
+                }
+            }
+        }
+    }
+}
+
+
+if (project.hasProperty("android")) { // Android libraries
+    task sourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.srcDirs
+    }
+
+    task javadoc(type: Javadoc) {
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+} else { // Java libraries
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
+}
+
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+task findConventions << {
+    println project.getConvention()
+}
+
+
+bintray {
+    user = rootProject.ext.bintrayUser
+    key = rootProject.ext.bintrayKey
+
+    publish = true
+    dryRun = false
+    override = true
+
+
+    pkg {
+        repo = rootProject.ext.REPO_NAME
+        name = project.name
+        desc = rootProject.ext.DESCRIPTION
+
+        websiteUrl = rootProject.ext.WEB_SITE_URL
+        issueTrackerUrl = "${websiteUrl}/${project.name}/issue"
+        vcsUrl = "${websiteUrl}.git"
+
+        licenses = rootProject.ext.LICENSE
+
+        labels = ['aar', 'android', 'example']
+        publicDownloadNumbers = false
+
+        // githubReleaseNotesFile = '${websiteUrl}/README.md'
+
+        configurations = ['archives']
+
+        version {
+            name = rootProject.ext.VERSION_NAME
+            desc = rootProject.ext.DESCRIPTION
+            released  = new Date()
+            vcsUrl = rootProject.ext.GIT_URL
+            vcsTag = rootProject.ext.VCS_TAG
+            attributes = ['gradle-plugin': 'com.use.less:com.use.less.gradle:gradle-useless-plugin']
+
+//            mavenCentralSync {
+//                sync = true //[Default: true] Determines whether to sync the version to Maven Central.
+//                user = 'userToken' //OSS user token: mandatory
+//                password = 'paasword' //OSS user password: mandatory
+//                close = '1' //Optional property. By default the staging repository is closed and artifacts are released to Maven Central. You can optionally turn this behaviour off (by puting 0 as value) and release the version manually.
+//            }
+        }
+    }
+}

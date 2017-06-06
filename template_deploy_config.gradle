@@ -1,0 +1,40 @@
+ext {
+    COMPILE_SDK = 25
+    BUILD_TOOLS = '25.0.2'
+    MIN_SDK = 19
+    TARGET_SDK = 21
+
+    VERSION_CODE = 1 //your version
+    VERSION_NAME = '0.0.1'
+
+    VCS_TAG = VERSION_NAME
+
+    MODULE_NAME = 'MODULE NAME'
+
+    // Bintray Upload Property
+    bintrayUser = 'Bintray User Name'
+    bintrayKey = 'Bintray API KEY'
+
+    USER_ORG = 'Bintray User Organization'
+    GROUP_ID = 'Group ID'
+
+    ARTIFACT_ID = 'Module Name' // not used
+    REPO_NAME = 'Bintray Repogitory Name'
+
+    DESCRIPTION = 'Module Description'
+
+    WEB_SITE_URL = 'Github URL'
+    GIT_URL = "${WEB_SITE_URL}.git"
+    ISSUE_TRACKER = "${WEB_SITE_URL}/issue"
+
+
+    LICENSE = ['Apache-2.0']
+
+    IS_UPLOADING = project.getGradle().startParameter.taskNames.any{it.contains('bintrayUpload')}
+
+
+    // Optional
+    DEVELOPER_ID = 'Developer ID'
+    DEVELOPER_NAME = 'Developer NAME'
+    DEVELOPER_EMAIL = 'Developer EMAIL'
+}
