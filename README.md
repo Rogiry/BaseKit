@@ -66,7 +66,7 @@ public class CustomApplication extends BaseApplication {
 
 ```
 
-and, set manyfest files.
+and, Sets the name in the application tag of the manifest file.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -81,12 +81,11 @@ and, set manyfest files.
 </manifest>
 ```
 
-Sets the name in the application tag of the manifest file.
-```xml
 
-```
 
-and, Always extend BaseActivity when using Activities.
+# __Important__ #
+Always extend BaseActivity when using Activities.
+
 ```java
 public class MainActivity extends BaseActivity {
 
