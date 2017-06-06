@@ -45,7 +45,7 @@ set name is 'com.rogiry.basekit.BaseApplication'
     package="com.rogiry.basekit.example">
 
     <application
-        android:name="com.rogiry.basekit.BaseApplication"
+        android:name="com.rogiry.basekit.BaseApplication">
         ...
     </application>
 
