@@ -83,7 +83,7 @@ and, Sets the name in the application tag of the manifest file.
 
 
 
-# __Important__ #
+### __Important__ ###
 Always extend BaseActivity when using Activities.
 
 ```java
