@@ -2,7 +2,11 @@
 BaseKit is contain that Activity, Application and Basic Method for android.
 
 # Download #
+
+### Maven ###
+
 Download the latest JAR or grab via Maven:
+
 ```gradle
 <dependency>
   <groupId>com.rogiry</groupId>
@@ -12,7 +16,7 @@ Download the latest JAR or grab via Maven:
 </dependency>
 ```
 
-or Gradle
+### Gradle ###
 ```gradle
 compile 'com.rogiry:basekit:{lastest-version}'
 ```
@@ -74,7 +78,7 @@ and, Sets the name in the application tag of the manifest file.
     package="com.rogiry.basekit.example">
 
     <application
-        android:name=".CustomApplication"
+        android:name=".CustomApplication">
         ...
     </application>
 
@@ -94,7 +98,8 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        progressON();
+        // add Your logic...
+        ...
     }
 }
 ```
