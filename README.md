@@ -21,18 +21,6 @@ Download the latest JAR or grab via Maven:
 compile 'com.rogiry:basekit:{lastest-version}'
 ```
 
-and Add repository
-
-```gradle
-repositories {
-    ...
-    maven {
-        url 'https://dl.bintray.com/rogiry/AndroidLib/'
-    }
-}
-```
-
-(The add repository process will delete after jcenter Sync)
 
 
 
